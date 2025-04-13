@@ -40,7 +40,7 @@ This implementation includes features like automatic mixed precision (AMP), hier
 
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/your-username/instant-nerf.git # Replace with your repo URL
+git clone https://github.com/Gifted87/instant-nerf.git # Replace with your repo URL
 cd instant-nerf
 ```
 
