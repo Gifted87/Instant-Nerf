@@ -1,0 +1,16 @@
+# Core ML/Compute
+torch>=2.0.0 # Check compatibility with your CUDA version
+# tiny-cuda-nn must be installed separately (see README)
+
+# Data Handling & Utilities
+numpy
+PyYAML>=6.0
+configargparse
+imageio
+imageio-ffmpeg # For video saving if needed
+tqdm
+scipy # Often needed for data processing/evaluation
+opencv-python-headless # For image manipulation if needed
+
+# Logging/Visualization
+tensorboard

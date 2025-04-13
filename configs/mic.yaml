@@ -1,0 +1,43 @@
+# Configuration for a real-world microphone scene (e.g., COLMAP data)
+dataset_type: 'llff' # Or your custom type for COLMAP/real data
+dataset_path: 'data/mic'
+
+# Training parameters (adjust as needed)
+learning_rate: 0.01
+lr_scheduler_step_size: 500000
+lr_scheduler_gamma: 0.1
+batch_size: 4096
+num_iterations: 30000 # Real scenes might need more iterations
+
+# NeRF Model parameters (can be same as lego or tuned)
+use_viewdirs: True
+num_layers_color: 3
+hidden_dim_color: 64
+num_layers_sigma: 2
+hidden_dim_sigma: 64
+
+# Hash Encoder (can be same as lego or tuned)
+use_hash_encoder: True
+hash_log2_size: 19
+hash_num_levels: 16
+hash_features_per_level: 2
+hash_base_resolution: 16
+hash_max_resolution: 2048 # Adjust if scene scale differs significantly
+
+# Renderer parameters
+num_samples_coarse: 64
+num_samples_fine: 128
+use_hierarchical: True
+perturb: True
+white_background: False # Typically False for real-world captures unless background is masked
+
+# Logging/Saving
+log_dir: 'logs/mic'
+checkpoint_dir: 'models/mic'
+save_every_iters: 5000
+validate_every_iters: 5000
+render_every_iters: 5000
+
+# Hardware
+device: 'cuda'
+use_amp: True

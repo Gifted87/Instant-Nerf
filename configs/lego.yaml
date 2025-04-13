@@ -1,0 +1,44 @@
+# Configuration for the LEGO bulldozer scene (Blender Synthetic)
+dataset_type: 'blender'
+dataset_path: 'data/lego' # Relative path to dataset
+
+# Training parameters
+learning_rate: 0.01
+lr_scheduler_step_size: 500000 # Learning rate decay steps
+lr_scheduler_gamma: 0.1       # Learning rate decay factor
+batch_size: 4096              # Number of rays per batch
+num_epochs: 1                 # Adjust based on desired iterations (~25k steps often enough for NGP)
+num_iterations: 25000         # Total training steps (alternative to epochs)
+
+# NeRF Model parameters
+use_viewdirs: True            # Use viewing directions
+num_layers_color: 3           # Number of layers for color MLP
+hidden_dim_color: 64          # Hidden dimension for color MLP
+num_layers_sigma: 2           # Number of layers for density MLP
+hidden_dim_sigma: 64          # Hidden dimension for density MLP
+
+# Hash Encoder (Instant-NGP specific)
+use_hash_encoder: True
+hash_log2_size: 19            # Log2 of hash table size (14-22 typical)
+hash_num_levels: 16           # Number of levels in the hash grid (L)
+hash_features_per_level: 2    # Features per level (F)
+hash_base_resolution: 16      # Base resolution (N_min)
+hash_max_resolution: 2048     # Max resolution (N_max) calculated via b = exp((ln(N_max) - ln(N_min)) / (L - 1))
+
+# Renderer parameters
+num_samples_coarse: 64        # Number of coarse samples per ray
+num_samples_fine: 128         # Number of fine samples per ray (hierarchical sampling)
+use_hierarchical: True        # Enable hierarchical sampling
+perturb: True                 # Add random perturbation to sample positions during training
+white_background: True        # Assume white background for Blender scenes
+
+# Logging/Saving
+log_dir: 'logs/lego'
+checkpoint_dir: 'models/lego'
+save_every_iters: 5000
+validate_every_iters: 5000
+render_every_iters: 5000      # Render test views during training
+
+# Hardware
+device: 'cuda'
+use_amp: True                 # Use Automatic Mixed Precision (highly recommended for NGP)
